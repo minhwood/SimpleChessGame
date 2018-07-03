@@ -37,5 +37,6 @@ public class Board extends JPanel {
 				else squares[i][j] = new Square(i,j,white);
 			}
 		}
+		squares[8][7].setPiece(new Knight("w"));
 	}
 }
