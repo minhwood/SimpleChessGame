@@ -12,10 +12,12 @@ public abstract class Piece {
 	protected String WHITE_ROOK_ICON = "IMG/rookw.png";
 	protected String BLACK_BISHOP_ICON = "IMG/bishopb.png";
 	protected String WHITE_BISHOP_ICON = "IMG/bishopw.png";
-	protected String BLACK_QUEEN_ICON = "IMG/knightb.png";
-	protected String WHITE_QUEEN_ICON = "IMG/knightw.png";
-	protected String BLACK_KING_ICON = "IMG/knightw.png";
-	protected String WHITE_KING_ICON = "IMG/knightw.png";
+	protected String BLACK_QUEEN_ICON = "IMG/queenb.png";
+	protected String WHITE_QUEEN_ICON = "IMG/queenw.png";
+	protected String BLACK_KING_ICON = "IMG/kingb.png";
+	protected String WHITE_KING_ICON = "IMG/kingw.png";
+	protected String BLACK_PAWN_ICON = "IMG/pawnb.png";
+	protected String WHITE_PAWN_ICON = "IMG/pawnw.png";
 	
 	boolean color;
 	ImageIcon icon;
@@ -23,6 +25,10 @@ public abstract class Piece {
 	
 	public Piece() {
 		onBoard = true;
+	}
+	
+	public void kill() {
+		onBoard = false;
 	}
 	
 	public boolean isBlack() {

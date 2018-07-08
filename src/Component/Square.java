@@ -23,7 +23,8 @@ public class Square extends JButton {
 	
 	public boolean setPiece(Piece piece) {
 		this.piece = piece;
-		setIcon(piece.icon);
+		if (piece == null) setIcon(null);
+		else setIcon(piece.icon);
 		return false;
 	}
 	
