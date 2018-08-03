@@ -1,6 +1,7 @@
 package Component;
 
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class King extends Piece{
 
@@ -17,14 +18,26 @@ public class King extends Piece{
 	}
 	
 	@Override
+	public void kill() {
+		if (color == true) JOptionPane.showMessageDialog(null,"Black Win");
+		else if (color == false) JOptionPane.showMessageDialog(null,"White Win");
+		onBoard = false;
+	}
+	
+	@Override
 	public boolean basicRuleCheck(int posx, int posy, int x, int y) {
-		// TODO Auto-generated method stub
-		return false;
+		int xOffset = x - posx;
+		int yOffset = y - posy;
+		if (Math.abs(xOffset) <= 1 && Math.abs(yOffset) <= 1) return true;
+		else return false;
 	}
 
 	@Override
 	public boolean moveValidation(int posx, int posy, int x, int y, Board board) {
-		// TODO Auto-generated method stub
+		if (basicRuleCheck(posx, posy, x, y)) {
+			if (board.squares[x][y].getPiece() != null && board.squares[x][y].getPiece().getColor() == this.color) return false;
+			else return true;
+		}
 		return false;
 	}
 

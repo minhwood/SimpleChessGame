@@ -23,6 +23,8 @@ public class Board extends JPanel implements ActionListener {
 	Color black = Color.DARK_GRAY;
 	Color white = Color.WHITE;
 	
+	Boolean turn;
+	
 	public Board() {
 		this.setLayout(new GridLayout(8,8));
 		initSquare();
@@ -31,12 +33,13 @@ public class Board extends JPanel implements ActionListener {
 				this.add(squares[i][j]);
 			}
 		}
+		turn = true;
 		this.setPreferredSize(new Dimension(800,800));
 		this.setVisible(true);
 	}
 	
 	private boolean activePiece(Square selectedSquare) {
-		if (selectedSquare.getPiece() != null) {
+		if (selectedSquare.getPiece() != null && selectedSquare.getPiece().getColor() == turn ) {
 			this.choosenPiece = selectedSquare;
 			this.choosenPiece.setBackground(Color.GREEN);
 			return true;
@@ -73,7 +76,7 @@ public class Board extends JPanel implements ActionListener {
 			{
 			squares[x][y].setPiece(choosenPiece.getPiece());
 			choosenPiece.setPiece(null);
-			//changeTurn();
+			changeTurn();
 			return true;
 			}
 			/*attack move*/
@@ -83,7 +86,7 @@ public class Board extends JPanel implements ActionListener {
 					squares[x][y].getPiece().kill();
 					squares[x][y].setPiece(choosenPiece.getPiece());
 					choosenPiece.setPiece(null);
-					//changeTurn();
+					changeTurn();
 					return true;		
 				}
 				else
@@ -143,6 +146,17 @@ public class Board extends JPanel implements ActionListener {
 		squares[1][4].setPiece(new Queen("b"));
 		squares[8][4].setPiece(new Queen("w"));
 		
+	}
+	
+	public void changeTurn()
+	{
+		if (turn==true){
+			turn=false;
+		}
+		else 	
+			{
+			turn=true;
+			}
 	}
 	
 	public void actionPerformed(ActionEvent click) {

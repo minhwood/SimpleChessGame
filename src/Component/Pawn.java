@@ -19,23 +19,82 @@ public class Pawn extends Piece {
 		}
 	}
 	
-	private boolean firstRule(int posx, int posy, int x , int y) {
-		return false;
-	}
-	
-	private boolean secondRule() {
-		return false;
-	}
 	
 	@Override
 	public boolean basicRuleCheck(int posx, int posy, int x, int y) {
-		// TODO Auto-generated method stub 
+		if (this.color == false) {
+			if (didFirstJump == true && x == posx + 2 ) {
+				return false;
+			}
+			else {
+				if ((x == posx + 2 && posy == y) || (x == posx + 1 && posy == y )) {
+					return true;
+				}
+				else if ((x == posx + 1 && y == posy + 1) || (x == posx + 1 && y == posy - 1)) {
+					return true;
+				}
+				else return false;
+			}
+		}
+		else if (this.color == true) {
+			if (didFirstJump == true && x == posx - 2 ) {
+				return false;
+			}
+			else {
+				if ((x == posx - 2 && posy == y) || (x == posx - 1 && posy == y )) {
+					return true;
+				}
+				else if ((x == posx - 1 && y == posy + 1) || (x == posx - 1 && y == posy - 1)) {
+					return true;
+				}
+				else return false;
+			}
+		}
 		return false;
 	}
 
 	@Override
 	public boolean moveValidation(int posx, int posy, int x, int y, Board board) {
-		// TODO Auto-generated method stub
+		if (basicRuleCheck(posx,posy,x,y) == true) {
+			if (this.color == false) {
+				if ((x == posx + 2 && posy == y) || (x == posx + 1 && posy == y )) {
+					if (board.squares[x][y].getPiece() != null) {
+						return false;
+					}
+					else {
+						didFirstJump = true;
+						return true;
+					}
+				}
+				else if ((x == posx + 1 && y == posy + 1) || (x == posx + 1 && y == posy - 1)) {
+					if (board.squares[x][y].getPiece() != null && board.squares[x][y].getPiece().getColor() != this.color) {
+						didFirstJump = true;
+						return true;
+					}
+					else return false;
+				}
+				else return false;
+			}
+			else if (this.color == true) {
+				if ((x == posx - 2 && posy == y) || (x == posx - 1 && posy == y )) {
+					if (board.squares[x][y].getPiece() != null) {
+						return false;
+					}
+					else {
+						didFirstJump = true;
+						return true;
+					}
+				}
+				else if ((x == posx - 1 && y == posy + 1) || (x == posx - 1 && y == posy - 1)) {
+					if (board.squares[x][y].getPiece() != null && board.squares[x][y].getPiece().getColor() != this.color) {
+						didFirstJump = true;
+						return true;
+					}
+					else return false;
+				}
+				else return false;
+			}
+		}
 		return false;
 	}
 
